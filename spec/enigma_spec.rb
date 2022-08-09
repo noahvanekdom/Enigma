@@ -12,6 +12,14 @@ describe Enigma do
             expect(enigma.date).to be_a(String)
             expect(enigma.date.length).to eq 6
         end
+
+        it 'has a character set that includes all lowercase letters and " "' do
+            expect(enigma.character_array).to eq ["a", "b", "c", "d", "e", "f",
+                                                  "g", "h", "i", "j", "k", "l",
+                                                  "m", "n", "o", "p", "q", "r",
+                                                  "s", "t", "u", "v", "w", "x",
+                                                  "y", "z", " "]
+        end
     end
 
     describe 'encrypt' do
@@ -33,6 +41,12 @@ describe Enigma do
 
         xit 'can encrypt using default values for date and key' do
             expect(enigma.encrypt("hello world")).to eq ""
+        end
+
+        context 'when no message is entered' do
+            it 'returns "please enter a message" ' do
+                expect(enigma.encrypt("")).to eq "Please enter a message"
+            end
         end
     end
 
@@ -60,6 +74,7 @@ describe Enigma do
             #allow statement here
             #expect(enigma.rand_key).to eq "22233"
             expect(enigma.rand_key.length).to eq 5
+            expect(enigma.rand_key).to be_a(String)
         end
     end
 
