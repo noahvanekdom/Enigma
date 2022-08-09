@@ -7,9 +7,10 @@ describe Enigma do
             expect(enigma).to be_instance_of Enigma
         end
 
-        describe 'date_string creation' do
-            has
-            it
+        describe 'date_array creation' do
+            #date_array = []
+           # how we do this?
+        end
 
         xit 'can encrypt a string' do
             expected = {
@@ -18,10 +19,19 @@ describe Enigma do
                 date: "040895"
 
             }
+            expected1 = {
+                encryption: "keder ohulw!",
+                key: "02715",
+                date: "040895"
 
+            }
+
+            expect(enigma.encrypt("hello world", "02715", "040895")).to eq expected
             expect(enigma.encrypt("hello world", "02715", "040895")).to eq expected
         end
     end
+
+
 
     describe 'creating keys' do
         xit 'can create the a key' do
