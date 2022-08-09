@@ -8,10 +8,11 @@ describe Enigma do
             expect(enigma).to be_instance_of Enigma
         end
 
-        describe 'date_array creation' do
-            #date_array = []
-           # how we do this?
+        it 'can return the date in mmddyy string format' do
+            expect(enigma.date).to be_a(String)
+            expect(enigma.date.length).to eq 6
         end
+
 
         ##BIG GOAL TEST HERE -- ONCE WE HAVE THIS WE ARE LIKE HALFWAY THERE REMEMBER
         ## JUST KEEP SWIMMING NOAH ITS GONNA BE OKAY
@@ -38,9 +39,29 @@ describe Enigma do
     ##Do we need these keys/offsets to be individual methods? maybe faster way to do it?
     describe 'creating keys' do
 
-        it 'can generate a random key' do
+        xit 'can generate a random key' do
             expect(enigma.keygen).to eq ""
+            expect(enigma.keygen.length).to eq 5
         end
+    end
+
+    describe 'creating offsets' do
+
+        xit 'can generate an offset from the date' do
+            expect(enigma.offset).to eq ''
+        end
+
+    end
+
+    describe 'creating final shift' do
+
+        xit 'can generate a final shift based on the array values for offset and key' do
+            expect(enigma.final_shift).to eq ''
+        end
+    end
+
+
+
 
         #make key array, make offset array, call positions in that array when rotating character array
 
@@ -85,7 +106,5 @@ describe Enigma do
 
     #     it 'can create the D shift' do
     #     end
-    end
-
 
 end
