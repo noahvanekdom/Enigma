@@ -30,6 +30,9 @@ class Enigma
     end
 
     def decrypt(message, key = @rand_key, date = @date)
+        if message.empty?
+            p 'Please enter a message'
+        end
         message = message.downcase.chars
         shifts = shift_generator(key, date)
         decryption = message.map.with_index do |character, index|
