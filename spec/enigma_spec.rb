@@ -12,22 +12,19 @@ describe Enigma do
             expect(enigma.date).to be_a(String)
             expect(enigma.date.length).to eq 6
         end
+    end
 
-
-        ##BIG GOAL TEST HERE -- ONCE WE HAVE THIS WE ARE LIKE HALFWAY THERE REMEMBER
-        ## JUST KEEP SWIMMING NOAH ITS GONNA BE OKAY
+    describe 'encrypt' do
         it 'can encrypt a string' do
             expected = {
                 encryption: "keder ohulw",
                 key: "02715",
                 date: "040895"
-
             }
             expected1 = {
                 encryption: "keder ohulw!?",
                 key: "02715",
                 date: "040895"
-
             }
 
             expect(enigma.encrypt("hello world", "02715", "040895")).to eq expected
@@ -35,8 +32,25 @@ describe Enigma do
         end
 
         xit 'can encrypt using default values for date and key' do
-            #allow -- need to mock/stub for sure here
-            expect(enigma.encrypt("hello world")).to eq "" #whatever is mocked
+            expect(enigma.encrypt("hello world")).to eq ""
+        end
+    end
+
+    describe 'decrypt' do
+        it 'can decrypt a string' do
+            expected = {
+                decryption: "hello world",
+                key: "02715",
+                date: "040895"
+            }
+            expected1 = {
+                decryption: "hello world!?",
+                key: "02715",
+                date: "040895"
+            }
+
+            expect(enigma.decrypt("keder ohulw", "02715", "040895")).to eq expected
+            expect(enigma.decrypt("keder ohulw!?", "02715", "040895")).to eq expected1
         end
     end
 
@@ -47,14 +61,6 @@ describe Enigma do
             #expect(enigma.rand_key).to eq "22233"
             expect(enigma.rand_key.length).to eq 5
         end
-    end
-
-    describe 'creating offsets' do
-
-        xit 'can generate an offset from the date' do
-            expect(offset_generator("123456")).to eq []
-        end
-
     end
 
     describe 'creating final shift' do
