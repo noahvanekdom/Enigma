@@ -16,7 +16,7 @@ describe Enigma do
 
         ##BIG GOAL TEST HERE -- ONCE WE HAVE THIS WE ARE LIKE HALFWAY THERE REMEMBER
         ## JUST KEEP SWIMMING NOAH ITS GONNA BE OKAY
-        xit 'can encrypt a string' do
+        it 'can encrypt a string' do
             expected = {
                 encryption: "keder ohulw",
                 key: "02715",
@@ -24,14 +24,14 @@ describe Enigma do
 
             }
             expected1 = {
-                encryption: "keder ohulw!",
+                encryption: "keder ohulw!?",
                 key: "02715",
                 date: "040895"
 
             }
 
             expect(enigma.encrypt("hello world", "02715", "040895")).to eq expected
-            expect(enigma.encrypt("hello world", "02715", "040895")).to eq expected
+            expect(enigma.encrypt("hello world!?", "02715", "040895")).to eq expected1
         end
 
         xit 'can encrypt using default values for date and key' do
