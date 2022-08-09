@@ -1,9 +1,10 @@
 require_relative 'spec_helper'
+require './lib/enigma'
 
 describe Enigma do
     let(:enigma) { Enigma.new }
     describe 'initialize' do
-        xit 'exists' do
+        it 'exists' do
             expect(enigma).to be_instance_of Enigma
         end
 
@@ -12,6 +13,8 @@ describe Enigma do
            # how we do this?
         end
 
+        ##BIG GOAL TEST HERE -- ONCE WE HAVE THIS WE ARE LIKE HALFWAY THERE REMEMBER
+        ## JUST KEEP SWIMMING NOAH ITS GONNA BE OKAY
         xit 'can encrypt a string' do
             expected = {
                 encryption: "keder ohulw",
@@ -32,48 +35,56 @@ describe Enigma do
     end
 
 
-
+    ##Do we need these keys/offsets to be individual methods? maybe faster way to do it?
     describe 'creating keys' do
-        xit 'can create the a key' do
-            expect(enigma.a_key('02715')).to eq '02'
+
+        it 'can generate a random key' do
+            expect(enigma.keygen).to eq ""
         end
 
-        xit 'can create the B key' do
-            expect(enigma.b_key('02715')).to eq '27'
-        end
+        #make key array, make offset array, call positions in that array when rotating character array
 
-        xit 'can create the C key' do
-            expect(enigma.c_key('02715')).to eq '71'
-        end
 
-        xit 'can create the D key' do
-            expect(enigma.d_key('02715')).to eq '15'
-        end
-    end
+    #     xit 'can create the a key' do
+    #         expect(enigma.a_key('02715')).to eq '02'
+    #     end
 
-    describe 'creating offsets' do
-        xit 'can create the A offset' do
-        end
-        xit 'can create the A offset' do
-        end
-        xit 'can create the A offset' do
-        end
-        xit 'can create the A offset' do
-        end
-    end
+    #     xit 'can create the B key' do
+    #         expect(enigma.b_key('02715')).to eq '27'
+    #     end
 
-    describe 'creating shift' do
-        xit 'can create the A shift' do
-        end
+    #     xit 'can create the C key' do
+    #         expect(enigma.c_key('02715')).to eq '71'
+    #     end
 
-        xit 'can create the B shift' do
-        end
+    #     xit 'can create the D key' do
+    #         expect(enigma.d_key('02715')).to eq '15'
+    #     end
+    # end
 
-        xit 'can create the C shift' do
-        end
+    # describe 'creating offsets' do
+    #     xit 'can create the A offset' do
+    #     end
+    #     xit 'can create the A offset' do
+    #     end
+    #     xit 'can create the A offset' do
+    #     end
+    #     xit 'can create the A offset' do
+    #     end
+    # end
 
-        it 'can create the D shift' do
-        end
+    # describe 'creating shift' do
+    #     xit 'can create the A shift' do
+    #     end
+
+    #     xit 'can create the B shift' do
+    #     end
+
+    #     xit 'can create the C shift' do
+    #     end
+
+    #     it 'can create the D shift' do
+    #     end
     end
 
 
