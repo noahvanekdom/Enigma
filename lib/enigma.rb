@@ -1,6 +1,6 @@
 require 'date'
 class Enigma
-    attr_reader :character_array, :date
+    attr_reader :character_array, :date, :rand_key
 
     def initialize
         @character_array = ("a".."z").to_a << " "
@@ -8,19 +8,24 @@ class Enigma
         @rand_key = (Array.new(5) { rand(0..9) }).join
     end
 
-    def a_key(key)
-        @rand_key[0..1].to_i
+    def shift_generator(key, date)
+        a_shift = (key[0..1].to_i + (date.to_i ** 2).to_s[-4..-1][0].to_i)
+        b_shift = (key[1..2].to_i + (date.to_i ** 2).to_s[-4..-1][1].to_i)
+        c_shift = (key[2..3].to_i + (date.to_i ** 2).to_s[-4..-1][2].to_i)
+        d_shift = (key[3..4].to_i + (date.to_i ** 2).to_s[-4..-1][3].to_i)
+        shifts_array = [a_shift, b_shift, c_shift, d_shift]
     end
 
-    def b_key(key)
-        @rand_key[1..2].to_i
-    end
-
-    def c_key(key)
-        @rand_key[2..3].to_i
-    end
-
-    def d_key(key)
-        @rand_key[3..4].to_i
+    def encrypt(message, key = @rand_key, date = @date)
+        message = message.downcase.chars
+        shifts = shift_generator(key, date)
+        encryption = message.map.with_index do |character, index|
+            if @character_array.include?(character) == false
+                character
+            else
+                @character_array[(@character_array.index(character) + shifts[index])]
+            end
+        end.join
+        {encryption: encryption, key: key, date: date}
     end
 end
