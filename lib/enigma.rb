@@ -34,7 +34,7 @@ class Enigma
     { encryption: encrypted_message, key: key, date: date }
   end
 
-  def decrypt(message, key = @rand_key, date = @date)
+  def decrypt(message, key, date = @date)
     message = message.downcase.chars
     shifts = shift_generator(key, date)
     decrypted_message = message.map.with_index do |character, index|

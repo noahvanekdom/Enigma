@@ -3,6 +3,16 @@ require './lib/enigma'
 
 describe Enigma do
   let(:enigma) { Enigma.new }
+  let(:expected) { {
+    encryption: 'keder ohulw',
+    key: '02715',
+    date: '040895'
+  } }
+  let(:expected1) { {
+    encryption: 'keder ohulw!?',
+    key: '02715',
+    date: '040895'
+  } }
   describe 'initialize' do
     it 'exists' do
       expect(enigma).to be_instance_of Enigma
@@ -24,22 +34,16 @@ describe Enigma do
 
   describe 'encrypt' do
     it 'can encrypt a string' do
-      expected = {
-        encryption: 'keder ohulw',
-        key: '02715',
-        date: '040895'
-      }
-      expected1 = {
-        encryption: 'keder ohulw!?',
-        key: '02715',
-        date: '040895'
-      }
-
       expect(enigma.encrypt('hello world', '02715', '040895')).to eq expected
       expect(enigma.encrypt('hello world!?', '02715', '040895')).to eq expected1
     end
 
-    xit 'can encrypt using default values for date and key' do
+    it 'can encrypt using default values for date and key' do
+      shift = [1, 2, 3, 4]
+      key = '123456'
+      allow(enigma).to receive(:shift_generator).and_return(shift)
+      allow(enigma).to receive(:rand_key).and_return(key)
+      allow_any_instance_of(Date).to receive(:strftime).and_return("040895")
       expect(enigma.encrypt('hello world')).to eq ''
     end
 
@@ -48,30 +52,37 @@ describe Enigma do
         expect(enigma.encrypt('')).to eq 'Please enter a message'
       end
     end
+
+
   end
 
   describe 'decrypt' do
+    let(:expected) { {
+      decryption: 'hello world',
+      key: '02715',
+      date: '040895'
+    } }
+    let(:expected1) { {
+      decryption: 'hello world!?',
+      key: '02715',
+      date: '040895'
+    } }
     it 'can decrypt a string' do
-      expected = {
-        decryption: 'hello world',
-        key: '02715',
-        date: '040895'
-      }
-      expected1 = {
-        decryption: 'hello world!?',
-        key: '02715',
-        date: '040895'
-      }
 
       expect(enigma.decrypt('keder ohulw', '02715', '040895')).to eq expected
       expect(enigma.decrypt('keder ohulw!?', '02715', '040895')).to eq expected1
     end
+
+    it 'can decrypt a string using default values for date' do
+    end
+
   end
 
   describe 'creating keys' do
     it 'can generate a random key' do
-      # allow statement here
-      # expect(enigma.rand_key).to eq "22233"
+      key = "22233"
+      allow(enigma).to receive(:rand_key).and_return(key)
+      expect(enigma.rand_key).to eq "22233"
       expect(enigma.rand_key.length).to eq 5
       expect(enigma.rand_key).to be_a(String)
     end
